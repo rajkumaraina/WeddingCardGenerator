@@ -7,6 +7,9 @@ import {
   ContainerTwo,
   Heading,
   InsideContainer,
+  ColorInput,
+  ParaElement1,
+  Inside,
   FormElement,
   LabelElement,
   InputElement,
@@ -46,11 +49,12 @@ const fontSizesOptionsList = [
 
 class MemeGenerator extends Component {
   state = {
-    imageUrl: '',
+    color: 'white',
     top: '',
     bottom: '',
     fontSize: fontSizesOptionsList[0].displayText,
     meme: false,
+    fontFamily: 'Roboto',
   }
 
   formSubmitted = event => {
@@ -63,8 +67,8 @@ class MemeGenerator extends Component {
     }
   }
 
-  imageChange = event => {
-    this.setState({imageUrl: event.target.value})
+  colorChange = event => {
+    this.setState({color: event.target.value})
   }
 
   topChange = event => {
@@ -79,23 +83,29 @@ class MemeGenerator extends Component {
     this.setState({fontSize: event.target.value})
   }
 
+  fontFamilyChange = event => {
+    this.setState({fontFamily: event.target.value})
+  }
+
   render() {
-    const {meme, imageUrl, top, bottom, fontSize} = this.state
+    const {meme, color, top, bottom, fontSize, fontFamily} = this.state
+    console.log(fontFamily)
     return (
       <MainContainer>
         <InsideContainer>
           <Container>
-            <Heading>Meme Generator</Heading>
+            <Heading>Wedding Card Design</Heading>
             <FormElement onSubmit={this.formSubmitted}>
-              <LabelElement htmlFor="image">Image URL</LabelElement>
-              <InputElement
+              <LabelElement htmlFor="image">Color</LabelElement>
+              <ColorInput
                 id="image"
-                type="text"
-                onChange={this.imageChange}
+                type="color"
+                onChange={this.colorChange}
+                color={color}
               />
-              <LabelElement htmlFor="top">Top Text</LabelElement>
+              <LabelElement htmlFor="top">Male Name</LabelElement>
               <InputElement id="top" type="text" onChange={this.topChange} />
-              <LabelElement htmlFor="bottom">Bottom Text</LabelElement>
+              <LabelElement htmlFor="bottom">Female Name</LabelElement>
               <InputElement
                 id="bottom"
                 type="text"
@@ -112,17 +122,56 @@ class MemeGenerator extends Component {
                   <option key={each.optionId}>{each.displayText}</option>
                 ))}
               </InputElement>
+              <LabelElement htmlFor="font">Font Family</LabelElement>
+              <InputElement
+                id="font"
+                as="select"
+                value={fontFamily}
+                onChange={this.fontFamilyChange}
+              >
+                <option value="Roboto" selected>
+                  Roboto
+                </option>
+                <option value="Bree-serif">Bree-Serif</option>
+                <option value="Monospace">Monospace</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Papyrus">Papyrus</option>
+                <option value="Brush Script MT">Brush Script MT</option>
+                <option value="Comic Sans MS">Comic Sans MS</option>
+              </InputElement>
               <ButtonElement type="submit">Generate</ButtonElement>
             </FormElement>
           </Container>
-          {meme ? (
-            <ContainerTwo data-testid="meme">
-              <ParaElement fontsize={fontSize} top>
-                {top}
-              </ParaElement>
-              <ParaElement fontsize={fontSize}>{bottom}</ParaElement>
-            </ContainerTwo>
-          ) : null}
+          <ContainerTwo data-testid="meme">
+            <ParaElement1 fontFamily={fontFamily} color={color}>
+              Wedding Invitation
+            </ParaElement1>
+            {meme ? (
+              <Inside>
+                <ParaElement
+                  fontsize={fontSize}
+                  fontFamily={fontFamily}
+                  color={color}
+                >
+                  {top}
+                </ParaElement>
+                <ParaElement
+                  fontsize={fontSize}
+                  fontFamily={fontFamily}
+                  color={color}
+                >
+                  WEDS
+                </ParaElement>
+                <ParaElement
+                  fontsize={fontSize}
+                  fontFamily={fontFamily}
+                  color={color}
+                >
+                  {bottom}
+                </ParaElement>
+              </Inside>
+            ) : null}
+          </ContainerTwo>
         </InsideContainer>
       </MainContainer>
     )

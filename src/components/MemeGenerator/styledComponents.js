@@ -14,15 +14,19 @@ display:flex
 `
 
 export const ContainerTwo = styled.div`
-  background-image: url('https://assets.ccbp.in/frontend/react-js/nature-img.png');
-  height: 350px;
-  width: 350px;
+  background-image: url('https://img.freepik.com/premium-vector/wedding-card-background-design_894042-100.jpg');
+  height: 90vh;
+  width: 550px;
   text-align: center;
+  background-size: cover;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`
+export const Inside = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: Center;
 `
-
 export const InsideContainer = styled.div`
   display: flex;
   align-items:center
@@ -50,6 +54,9 @@ export const InputElement = styled.input`
   outline: none;
   width: 80%;
 `
+export const ColorInput = styled(InputElement)`
+  background-color: ${props => props.color};
+`
 export const FormElement = styled.form`
   display: flex;
   flex-direction: column;
@@ -69,9 +76,14 @@ export const ButtonElement = styled.button`
   outline: none;
 `
 export const ParaElement = styled.p`
-  font-size: ${props => {
-    console.log(props)
-    return props.fontsize
-  }}px;
+  font-size: ${props => props.fontsize}px;
+
+  font-family: ${props => props.fontFamily};
+  color: ${props => props.color};
+`
+export const ParaElement1 = styled.h1`
+  font-size: 55px;
+  align-self: flex-start;
+  font-style: italic;
   color: #ffffff;
 `
